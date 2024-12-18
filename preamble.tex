@@ -1,0 +1,141 @@
+\usepackage{amsthm}
+\usepackage{amsmath, amsfonts, mathabx}
+\usepackage{mathtools,array,booktabs,mathabx,stmaryrd}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tocloft}
+\usepackage{titletoc}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage[inline]{enumitem}
+\usepackage{forest}
+\forestset{m/.style={baseline,
+            for tree={parent anchor=south, 
+              child anchor=north,
+              align=center,
+              inner sep=0pt}}}
+\usepackage{diagbox}
+\usepackage{bussproofs}
+\usepackage[tableaux]{prooftrees}
+\EnableBpAbbreviations
+\usepackage{pdflscape}
+\usepackage{multicol}
+\usepackage[top=2cm]{geometry}
+\usepackage{xparse}
+\usepackage{xepersian}
+\usepackage{proof}
+
+\settextfont[Scale=1.3]{IRBadr}
+\linespread{1.2}
+
+\newcommand*{\maxFiles}{200}
+\newcommand{\loaddir}[1]{\foreach \s in {1,2,...,\maxFiles}{%
+\IfFileExists{#1/sessions/\s.tex} {%
+  \setcounter{section}{\numexpr\s-1}%
+  \section{جلسهٔ \tartibinumeral{\s}} \label{s\s} \input{#1/sessions/\s.tex}%
+}%
+}%
+}
+
+\newlistof{exn}{exn}{}
+\theoremstyle{definition}
+\newtheorem{exc}[exn]{جلسه}
+\newcommand{\exn}[1]{\setcounter{exn}{#1}\addtocounter{exn}{-1}\exc%
+\addcontentsline{exn}{exn}{\protect\numberline{}#1}%
+}
+
+\counterwithin*{equation}{exn}
+
+\titlecontents*{exn}[0pt]{}{}{}{%
+%TODO status
+}[\quad][]
+
+
+
+\usepackage{versions}
+\excludeversion{ans}
+
+\makeatletter
+\providecommand*{\sledom}{%
+  \mathrel{%
+    \mathpalette\@sledom\models
+  }%
+}
+\newcommand*{\@sledom}[2]{%
+  \reflectbox{$\m@th#1#2$}%
+}
+\makeatother
+
+\renewcommand\beginmarkversion{\\\textbf{پاسخ: }}
+\renewcommand\endmarkversion{}
+
+\forestset{line numbering = false, just sep = 0em, check with = {:}}
+
+\newcommand{\agrr}{\text{ ~ اگرر ~ }}
+\newcommand{\va}{\text{ ~ و ~ }}
+
+\newcommand*{\veeI}[1]{\RightLabel{$\vee$\lr I}\UnaryInfC{#1}}
+
+\NewDocumentCommand{\veeE}{o m}{%
+  \IfNoValueTF{#1}{
+    \RightLabel{$\vee$\lr{E}}\TIC{#2}
+  }{
+    \RightLabel{$\vee$\lr{E} $(#1)$}\TIC{#2}
+  }
+}
+
+\newcommand*{\botE}[1]{\RightLabel{$\bot$\lr E}\UnaryInfC{#1}}
+
+\NewDocumentCommand{\negI}{o m}{%
+  \IfNoValueTF{#1}{
+    \RightLabel{$\neg$\lr I}\UnaryInfC{#2}
+  }{
+    \RightLabel{$\neg$\lr I $(#1)$}\UnaryInfC{#2}
+  }
+}
+\newcommand*{\negE}{\RightLabel{$\neg$\lr E}\BinaryInfC{$\bot$}}
+
+\newcommand*{\wedI}[1]{\RightLabel{$\wedge$\lr I}\BinaryInfC{#1}}
+\newcommand*{\wedE}[1]{\RightLabel{$\wedge$\lr E}\UnaryInfC{#1}}
+
+\NewDocumentCommand{\toI}{o m}{%
+  \IfNoValueTF{#1}{
+    \RightLabel{$\to$\lr I}\UnaryInfC{#2}
+  }{
+    \RightLabel{$\to$\lr I $(#1)$}\UnaryInfC{#2}
+  }
+}
+\newcommand*{\toE}[1]{\RightLabel{$\to$\lr{E}}\BinaryInfC{#1}}
+
+\NewDocumentCommand{\RAA}{o m}{%
+  \IfNoValueTF{#1}{
+    \RightLabel{\lr{RAA}}\UnaryInfC{#2}
+  }{
+    \RightLabel{\lr{RAA} $(#1)$}\UnaryInfC{#2}
+  }
+}
+
+\NewDocumentCommand{\exE}{o m}{%
+  \IfNoValueTF{#1}{
+    \RightLabel{$\exists$\lr{E}}\BIC{#2}
+  }{
+    \RightLabel{$\exists$\lr{E} $(#1)$}\BIC{#2}
+  }
+}
+
+\newcommand*{\exI}[1]{\RightLabel{$\exists$\lr{E}}\UIC{#1}}
+
+\newcommand*{\faE}[1]{\RightLabel{$\forall$\lr{E}}\UIC{#1}}
+
+\newcommand*{\faI}[1]{\RightLabel{$\forall$\lr{I}}\UIC{#1}}
+
+\newcommand*{\eqSubst}[1]{\RightLabel{$=$\lr{sub.}}\BIC{#1}}
+
+\newcommand*{\prop}{\textsc{\lr{Prop}}}
+
+
+\newcommand*{\vdashIPC}{\vdash_\text{\lr{IPC}}}
+\newcommand*{\vdashCPC}{\vdash_\text{\lr{CPC}}}
+\newcommand*{\Der}{\mathcal{D}}
+\newcommand*{\vdashHP}{\vdash_\text{\lr{HP}}}
+\newcommand*{\upset}{\uparrow\!\!}
+\newcommand*{\downset}{\downarrow\!\!}

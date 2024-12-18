@@ -1,0 +1,80 @@
+name: build
+on:
+  push:
+jobs:
+  build-all-job:
+    runs-on: ubuntu-latest
+    name: Build (all)
+    steps:
+    - uses: actions/checkout@v1
+    - name: Compile
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: "main.tex"
+        extra_fonts: |
+          res/IRBadr.ttf
+          res/IRBadrBold.ttf
+          res/IRBadrIranic.ttf
+        latexmk_use_xelatex: true
+        latexmk_shell_escape: true
+    - name: Upload
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: "main.pdf"
+        asset_name: "logic-lecture-notes.pdf"
+        tag: release
+        overwrite: true
+        prerelease: true
+  build-lattice-job:
+    runs-on: ubuntu-latest
+    name: Build (Lattice)
+    steps:
+    - uses: actions/checkout@v1
+    - name: Compile
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: "main.tex"
+        extra_fonts: |
+          ../res/IRBadr.ttf
+          ../res/IRBadrBold.ttf
+          ../res/IRBadrIranic.ttf
+        latexmk_use_xelatex: true
+        latexmk_shell_escape: true
+        working_directory: lattice-theory/
+        work_in_root_file_dir: true
+    - name: Upload
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: "lattice-theory/main.pdf"
+        asset_name: "lattice-theory-notes.pdf"
+        tag: release
+        overwrite: true
+        prerelease: true
+  build-category-job:
+    runs-on: ubuntu-latest
+    name: Build (Category)
+    steps:
+    - uses: actions/checkout@v1
+    - name: Compile
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: "main.tex"
+        extra_fonts: |
+          ../res/IRBadr.ttf
+          ../res/IRBadrBold.ttf
+          ../res/IRBadrIranic.ttf
+        latexmk_use_xelatex: true
+        latexmk_shell_escape: true
+        working_directory: category-theory/
+        work_in_root_file_dir: true
+    - name: Upload
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: "category-theory/main.pdf"
+        asset_name: "category-theory-notes.pdf"
+        tag: release
+        overwrite: true
+        prerelease: true
