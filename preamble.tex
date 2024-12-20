@@ -36,24 +36,6 @@
 }%
 }
 
-\newlistof{exn}{exn}{}
-\theoremstyle{definition}
-\newtheorem{exc}[exn]{جلسه}
-\newcommand{\exn}[1]{\setcounter{exn}{#1}\addtocounter{exn}{-1}\exc%
-\addcontentsline{exn}{exn}{\protect\numberline{}#1}%
-}
-
-\counterwithin*{equation}{exn}
-
-\titlecontents*{exn}[0pt]{}{}{}{%
-%TODO status
-}[\quad][]
-
-
-
-\usepackage{versions}
-\excludeversion{ans}
-
 \makeatletter
 \providecommand*{\sledom}{%
   \mathrel{%
@@ -65,8 +47,6 @@
 }
 \makeatother
 
-\renewcommand\beginmarkversion{\\\textbf{پاسخ: }}
-\renewcommand\endmarkversion{}
 
 \forestset{line numbering = false, just sep = 0em, check with = {:}}
 
