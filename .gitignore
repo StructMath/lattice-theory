@@ -40,3 +40,5 @@ README.md
 *.synctex(busy)
 *.sen
 *.out
+*.synctex.gz
+*.xdv
